@@ -1,3 +1,7 @@
+from fastapi import File, UploadFile
+from io import StringIO
+import pandas as pd
+
 async def is_csv(file_name: str) -> bool:
     """check if given file is a csv or not"""
 
@@ -7,3 +11,19 @@ async def is_csv(file_name: str) -> bool:
         return True
     
     return False
+    
+async def handle_uploaded_file(file: UploadFile):
+    if not await is_csv(file.filename):
+        return {"msg": "err : not a csv file"}
+    
+    df = pd.read_csv(StringIO(str(file.file.read(), 'utf-8')), encoding='utf-8')
+    
+    # look for 'customer_average_rating' and 'product_name' in the columns
+    if "product_name" not in list(df.columns):
+        return {"msg": "err : could not find 'product_name' column"}
+    elif "customer_average_rating" not in list(df.columns):
+        return {"msg": "err : could not find 'customer_average_rating' column"}
+    
+    top_products = df[df['customer_average_rating'] >= df['customer_average_rating'].max()]
+    
+    return {"top_products": top_products.to_dict()}
