@@ -11,8 +11,13 @@ async def is_csv(file_name: str) -> bool:
         return True
     
     return False
-    
-async def handle_uploaded_file(file: UploadFile):
+
+async def handle_uploaded_file(file: UploadFile = File(...)):
+    """ 
+    Handle uploaded file, check if it .csv and then extract top rating
+    products information from it.
+    """
+
     if not await is_csv(file.filename):
         return {"msg": "err : not a csv file"}
     
