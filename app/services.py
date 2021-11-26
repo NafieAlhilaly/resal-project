@@ -1,6 +1,7 @@
 from fastapi import File, UploadFile
 from io import StringIO
 import pandas as pd
+import json
 
 def is_csv(file_name: str) -> bool:
     """check if given file is a csv or not"""
@@ -37,4 +38,6 @@ def handle_uploaded_file(file: str , filename: str, from_memory: bool = True):
     
     top_products = df[df['customer_average_rating'] >= df['customer_average_rating'].max()]
     
-    return {"top_products": top_products.to_dict()}
+    top_products = {"top_products":list(top_products['product_name']), "product_rating":list(top_products['customer_average_rating'])}
+    
+    return json.dumps(top_products)
