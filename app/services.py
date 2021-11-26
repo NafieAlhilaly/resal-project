@@ -1,5 +1,5 @@
 from io import StringIO
-from typing import Any, Optional, Union
+from typing import Any, Union
 import pandas as pd
 import json
 
