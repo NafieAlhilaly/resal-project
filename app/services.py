@@ -26,7 +26,10 @@ def handle_uploaded_file(file: str , filename: str, from_memory: bool = True) ->
     products information from it.
 
     from_memory is true if file is a temporary file in memory 
-    else it will read file as it is in local storage
+    else it will read file from local storage
+
+    it will return json string if no errors
+    or return a dict with error message if any error happens
     """
 
     if not is_csv(filename):
