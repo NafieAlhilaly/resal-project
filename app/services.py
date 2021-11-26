@@ -1,5 +1,5 @@
 from io import StringIO
-from typing import Union
+from typing import Any, Optional, Union
 import pandas as pd
 import json
 
@@ -12,6 +12,13 @@ def is_csv(file_name: str) -> bool:
         return True
     
     return False
+
+def send_notifications(content: Any, msg: str = "Your file is ready") -> dict:
+    """
+    send notifiction to user when file is done proccessing
+    """
+
+    return {"msg": msg, "content": content}
 
 def handle_uploaded_file(file: str , filename: str, from_memory: bool = True) -> Union[str, dict]:
     """ 
