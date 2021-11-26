@@ -36,5 +36,5 @@ def handle_uploaded_file(file: str , filename: str, from_memory: bool = True):
         return {"msg": "err : could not find 'customer_average_rating' column"}
     
     top_products = df[df['customer_average_rating'] >= df['customer_average_rating'].max()]
-    print(top_products)
+    
     return {"top_products": top_products.to_dict()}
