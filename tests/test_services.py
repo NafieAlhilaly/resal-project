@@ -30,7 +30,7 @@ def test_handle_uploaded_file_no_duplicates():
 
 def test_handle_uploaded_file_with_duplicates():
     """
-    test uploaded file with duplicated data(same rating)
+    test uploaded file without duplicated data(same rating)
     """
 
     with open("tests/sample data files/sample_data_duplicates.csv") as file:
@@ -38,3 +38,14 @@ def test_handle_uploaded_file_with_duplicates():
             file, 
             os.path.basename(file.name), 
             False) == {'top_products': {'customer_average_rating': {0: 5.0, 1: 5.0}, 'id': {0: 126, 1: 123}, 'product_name': {0: 'Arekah gift card', 1: 'Massoub gift card'}}}
+
+def test_handle_uploaded_file_no_average_column():
+    """
+    test uploaded file with missing column 'customer_average_rating'
+    """
+
+    with open("tests/sample data files/sample_data_without_average_column.csv") as file:
+        assert services.handle_uploaded_file(
+            file, 
+            os.path.basename(file.name), 
+            False) == {'msg': "err : could not find 'customer_average_rating' column"}
