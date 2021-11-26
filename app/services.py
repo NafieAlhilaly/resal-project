@@ -38,11 +38,16 @@ def handle_uploaded_file(file: str , filename: str, from_memory: bool = True) ->
     Handle uploaded file, check if it .csv and then extract top rating
     products information from it.
 
-    from_memory is true if file is a temporary file in memory 
-    else it will read file from local storage
+    params:
+        from_memory: is true if file is a temporary file in memory 
+        else it will read file from local storage
 
-    it will return json string if no errors
-    or return a dict with error message if any error happens
+        file: if from_memory is True file is expected to be a string representation of the file, if False
+            file is string path in local storage
+
+    return :
+        it will return json string if no errors
+        or return a dict with error message if any error happens
     """
 
     if not is_csv(filename):
