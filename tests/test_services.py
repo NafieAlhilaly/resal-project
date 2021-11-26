@@ -71,9 +71,9 @@ def test_send_notifications_defaults():
 
     assert services.send_notifications() == {"msg": "Your file is ready", "content": None}
 
-def test_send_notifications_given_params():
+def test_send_notifications_random_params():
     """
-    test send notifications with given message and content
+    test send notifications with given random messages and content
     """
 
     msgs = [
