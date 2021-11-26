@@ -62,3 +62,10 @@ def test_handle_uploaded_file_no_product_column():
             file, 
             os.path.basename(file.name), 
             False) == {'msg': "err : could not find 'product_name' column"}
+
+def test_send_notifications():
+    """
+    test send notifications with defaults
+    """
+
+    assert services.send_notifications() == {"msg": "Your file is ready", "content": None}

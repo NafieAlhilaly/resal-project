@@ -13,7 +13,7 @@ def is_csv(file_name: str) -> bool:
     
     return False
 
-def send_notifications(content: Any, msg: str = "Your file is ready") -> dict:
+def send_notifications(content: Any = None, msg: str = "Your file is ready") -> dict:
     """
     send notifiction to user when file is done proccessing
     """
