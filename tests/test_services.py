@@ -1,4 +1,5 @@
 import os
+import random
 from app import services
 
 def test_is_csv():
@@ -69,3 +70,27 @@ def test_send_notifications_defaults():
     """
 
     assert services.send_notifications() == {"msg": "Your file is ready", "content": None}
+
+def test_send_notifications_given_params():
+    """
+    test send notifications with given message and content
+    """
+
+    msgs = [
+        "File is ready",
+        "Your file is done",
+        "File done prccessing",
+        "File ready!",
+        "Your data is ready",
+        "Data done proccessing",
+        "Data ready"
+    ]
+    files = [
+        "top_products.csv",
+        "top_products.json",
+        "top_products.xlsx"
+    ]
+    msg = random.choice(msgs)
+    file = random.choice(files)
+
+    assert services.send_notifications(msg=msg, content=file) == {"msg":msg, "content":file}
