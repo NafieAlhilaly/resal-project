@@ -1,6 +1,4 @@
 from fastapi import FastAPI, File, UploadFile, BackgroundTasks
-from io import StringIO
-import pandas as pd
 from app import services
 
 app = FastAPI()
