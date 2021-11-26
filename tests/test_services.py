@@ -49,3 +49,14 @@ def test_handle_uploaded_file_no_average_column():
             file, 
             os.path.basename(file.name), 
             False) == {'msg': "err : could not find 'customer_average_rating' column"}
+
+def test_handle_uploaded_file_no_product_column():
+    """
+    test uploaded file with missing column 'product_name'
+    """
+
+    with open("tests/sample data files/sample_data_without_product_column.csv") as file:
+        assert services.handle_uploaded_file(
+            file, 
+            os.path.basename(file.name), 
+            False) == {'msg': "err : could not find 'product_name' column"}
