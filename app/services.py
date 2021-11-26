@@ -12,17 +12,23 @@ def is_csv(file_name: str) -> bool:
     
     return False
 
-def handle_uploaded_file(file: UploadFile = File(...)):
+def handle_uploaded_file(file: str , filename: str, from_memory: bool = True):
     """ 
     Handle uploaded file, check if it .csv and then extract top rating
     products information from it.
+
+    from_memory is true if file is a temporary file in memory 
+    else it will read file as it is in local storage
     """
 
-    if not is_csv(file.filename):
+    if not is_csv(filename):
         return {"msg": "err : not a csv file"}
-    
-    df = pd.read_csv(StringIO(str(file.file.read(), 'utf-8')), encoding='utf-8')
-    
+
+    if from_memory:
+        df = pd.read_csv(StringIO(str(file, 'utf-8')), encoding='utf-8')
+    else:
+        df = pd.read_csv(file)
+
     # look for 'customer_average_rating' and 'product_name' in the columns
     if "product_name" not in list(df.columns):
         return {"msg": "err : could not find 'product_name' column"}
@@ -30,5 +36,5 @@ def handle_uploaded_file(file: UploadFile = File(...)):
         return {"msg": "err : could not find 'customer_average_rating' column"}
     
     top_products = df[df['customer_average_rating'] >= df['customer_average_rating'].max()]
-    
+    print(top_products)
     return {"top_products": top_products.to_dict()}
