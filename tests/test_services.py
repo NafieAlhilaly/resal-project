@@ -26,7 +26,20 @@ def test_handle_uploaded_file_no_duplicates():
         assert services.handle_uploaded_file(
             file, 
             os.path.basename(file.name), 
-            False) == {'top_products': {'customer_average_rating': {0: 5.0}, 'id': {0: 123}, 'product_name': {0: 'Massoub gift card'}}}
+            False) == {
+                        'top_products': {
+                            'customer_average_rating': {
+                                0: 5.0
+                            },
+                            'id': {
+                                0: 123
+                            },
+                            'product_name': {
+                                0: 'Massoub gift card'
+                            }
+                        }
+                    }
+
 
 def test_handle_uploaded_file_with_duplicates():
     """
@@ -37,7 +50,23 @@ def test_handle_uploaded_file_with_duplicates():
         assert services.handle_uploaded_file(
             file, 
             os.path.basename(file.name), 
-            False) == {'top_products': {'customer_average_rating': {0: 5.0, 1: 5.0}, 'id': {0: 126, 1: 123}, 'product_name': {0: 'Arekah gift card', 1: 'Massoub gift card'}}}
+            False) == {
+                        'top_products': {
+                            'customer_average_rating': {
+                                0: 5.0,
+                                1: 5.0
+                            },
+                            'id': {
+                                0: 126,
+                                1: 123
+                            },
+                            'product_name': {
+                                0: 'Arekah gift card',
+                                1: 'Massoub gift card'
+                            }
+                        }
+                    }
+
 
 def test_handle_uploaded_file_no_average_column():
     """
