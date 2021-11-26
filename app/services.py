@@ -47,4 +47,5 @@ def handle_uploaded_file(file: str , filename: str, from_memory: bool = True) ->
     
     top_products = {"top_products":list(top_products['product_name']), "product_rating":list(top_products['customer_average_rating'])}
     
+    send_notifications(content=json.dumps(top_products))
     return json.dumps(top_products)
