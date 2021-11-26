@@ -23,6 +23,12 @@ def is_csv(file_name: str) -> bool:
 def send_notifications(content: Any = None, msg: str = "Your file is ready") -> dict:
     """
     send notifiction to user when file is done proccessing
+
+    params:
+        content: any type , extended content for the message default value is None
+        msg: str type , a notification main message default value is 'Your file is ready'
+
+    return: dict of the message and content
     """
 
     return {"msg": msg, "content": content}
