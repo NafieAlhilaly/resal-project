@@ -33,7 +33,7 @@ def send_notifications(content: Any = None, msg: str = "Your file is ready") -> 
 
     return {"msg": msg, "content": content}
 
-def handle_uploaded_file(file: str , filename: str, from_memory: bool = True) -> Union[str, dict]:
+def handle_file(file: str , filename: str, from_memory: bool = True) -> Union[str, dict]:
     """ 
     Handle uploaded file, check if it .csv and then extract top rating
     products information from it.

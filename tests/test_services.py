@@ -24,7 +24,7 @@ def test_handle_uploaded_file_no_duplicates():
     """
 
     with open("tests/sample data files/sample_data.csv") as file:
-        assert services.handle_uploaded_file(
+        assert services.handle_file(
             file, 
             os.path.basename(file.name), 
             False) == '{"top_products": ["Massoub gift card"], "product_rating": [5.0]}'
@@ -36,7 +36,7 @@ def test_handle_uploaded_file_with_duplicates():
     """
 
     with open("tests/sample data files/sample_data_duplicates.csv") as file:
-        assert services.handle_uploaded_file(
+        assert services.handle_file(
             file, 
             os.path.basename(file.name), 
             False) == '{"top_products": ["Arekah gift card", "Massoub gift card"], "product_rating": [5.0, 5.0]}'
@@ -48,7 +48,7 @@ def test_handle_uploaded_file_no_average_column():
     """
 
     with open("tests/sample data files/sample_data_without_average_column.csv") as file:
-        assert services.handle_uploaded_file(
+        assert services.handle_file(
             file, 
             os.path.basename(file.name), 
             False) == {'msg': "err : could not find 'customer_average_rating' column"}
@@ -59,7 +59,7 @@ def test_handle_uploaded_file_no_product_column():
     """
 
     with open("tests/sample data files/sample_data_without_product_column.csv") as file:
-        assert services.handle_uploaded_file(
+        assert services.handle_file(
             file, 
             os.path.basename(file.name), 
             False) == {'msg': "err : could not find 'product_name' column"}
