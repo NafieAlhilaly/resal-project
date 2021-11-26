@@ -1,4 +1,5 @@
 from io import StringIO
+from typing import Union
 import pandas as pd
 import json
 
@@ -12,7 +13,7 @@ def is_csv(file_name: str) -> bool:
     
     return False
 
-def handle_uploaded_file(file: str , filename: str, from_memory: bool = True):
+def handle_uploaded_file(file: str , filename: str, from_memory: bool = True) -> Union[str, dict]:
     """ 
     Handle uploaded file, check if it .csv and then extract top rating
     products information from it.
