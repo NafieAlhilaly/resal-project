@@ -4,7 +4,14 @@ import pandas as pd
 import json
 
 def is_csv(file_name: str) -> bool:
-    """check if given file is a csv or not"""
+    """
+    check if given file is a csv or not
+    
+    param: 
+        file_name: name of the file as string like 'file.extension'
+
+    return: True if file_name contains csv, False if not
+    """
 
     file_extention = file_name.split(".")[1]
     
