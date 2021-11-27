@@ -1,3 +1,4 @@
+from typing import Any
 from fastapi import FastAPI, File, UploadFile, BackgroundTasks, HTTPException, WebSocket
 from fastapi.responses import HTMLResponse
 from app import services
@@ -7,7 +8,7 @@ import pandas as pd
 app = FastAPI()
 
 @app.post("/upload", status_code=202)
-async def upload(background_tasks: BackgroundTasks, file: UploadFile = File(...)):
+async def upload(background_tasks: BackgroundTasks, file: UploadFile = File(...)) -> Any:
 
     """
     Endpoint accepts a File request expected to be a csv file, it will check if it csv or not
@@ -57,14 +58,14 @@ html = """
 """
 
 @app.get("/")
-async def main():
+async def main() -> Any:
     """ a smple html form to recieve files/messages from"""
     return HTMLResponse(html)
 
 @app.websocket("/ws")
-async def websocket_endpoint(websocket: WebSocket):
+async def websocket_endpoint(websocket: WebSocket) -> Any:
     """ a websocket """
-    
+
     await websocket.accept()
     while True:
         data = await websocket.receive_bytes()
