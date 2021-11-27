@@ -4,6 +4,15 @@ from fastapi.testclient import TestClient
 
 client = TestClient(main.app)
 
+def test_main_endpoint() -> None:
+    """
+    test get('/') 
+    """
+    response = client.get("/")
+    response.status_code == 200
+    response == main.html
+
+
 def test_upload_csv() -> None:
     """Test upload endpoint if file is recieved and it is a csv file"""
     file = open("tests/sample data files/sample_data.csv")
