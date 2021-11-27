@@ -29,7 +29,7 @@ def send_notifications(content: Any = None, msg: str = "Your file is ready") -> 
 
     return: dict of the message and content
     """
-    print("done")
+    
     return {"msg": msg, "content": content}
 
 def handle_file(file: Any, from_memory: bool = True) -> dict:
