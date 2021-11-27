@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 from fastapi import FastAPI, File, UploadFile, BackgroundTasks, HTTPException, WebSocket
 from fastapi.responses import HTMLResponse
 from app import services
@@ -24,7 +24,7 @@ async def upload(background_tasks: BackgroundTasks, file: UploadFile = File(...)
     return {"message": "file received, processing your file, you'll be notified when we finish proccessing"}
 
 
-html = """
+html: Literal = """
 <!DOCTYPE html>
 <html>
     <head>
