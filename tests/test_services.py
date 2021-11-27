@@ -29,7 +29,7 @@ def test_handle_file_no_duplicates() -> None:
             False) == {'msg': 'Your file is ready', 'content': {'top_products': ['Massoub gift card'], 'products_rating': 5.0}}
 
 
-def test_handle_file_with_duplicates() -> None:
+def test_handle_file_duplicates() -> None:
     """
     test uploaded file without duplicated data(same rating)
     """
