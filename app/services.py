@@ -29,7 +29,7 @@ def send_notifications(content: Any = None, msg: str = "Your file is ready") -> 
 
     return: dict of the message and content
     """
-
+    print("done")
     return {"msg": msg, "content": content}
 
 def handle_file(file, filename: str, from_memory: bool = True) -> Union[str, dict]:
@@ -66,6 +66,6 @@ def handle_file(file, filename: str, from_memory: bool = True) -> Union[str, dic
     top_products = df[df['customer_average_rating'] >= df['customer_average_rating'].max()]
     
     top_products = {"top_products":list(top_products['product_name']), "product_rating":list(top_products['customer_average_rating'])}
-    
-    send_notifications(content=top_products)
+
+    send_notifications()
     return top_products
