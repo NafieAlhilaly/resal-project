@@ -18,7 +18,7 @@ def test_is_not_csv():
     file: str = "file_name.pdf"
     assert services.is_csv(file) == False
 
-def test_handle_uploaded_file_no_duplicates():
+def test_handle_file_no_duplicates():
     """
     test uploaded file without duplicated data(same rating)
     """
@@ -27,10 +27,10 @@ def test_handle_uploaded_file_no_duplicates():
         assert services.handle_file(
             file, 
             os.path.basename(file.name), 
-            False) == '{"top_products": ["Massoub gift card"], "product_rating": [5.0]}'
+            False) == {"top_products": ["Massoub gift card"], "product_rating": [5.0]}
 
 
-def test_handle_uploaded_file_with_duplicates():
+def test_handle_file_with_duplicates():
     """
     test uploaded file without duplicated data(same rating)
     """
@@ -39,10 +39,10 @@ def test_handle_uploaded_file_with_duplicates():
         assert services.handle_file(
             file, 
             os.path.basename(file.name), 
-            False) == '{"top_products": ["Arekah gift card", "Massoub gift card"], "product_rating": [5.0, 5.0]}'
+            False) == {"top_products": ["Arekah gift card", "Massoub gift card"], "product_rating": [5.0, 5.0]}
 
 
-def test_handle_uploaded_file_no_average_column():
+def test_handle_file_no_average_column():
     """
     test uploaded file with missing column 'customer_average_rating'
     """
@@ -53,7 +53,7 @@ def test_handle_uploaded_file_no_average_column():
             os.path.basename(file.name), 
             False) == {'msg': "err : could not find 'customer_average_rating' column"}
 
-def test_handle_uploaded_file_no_product_column():
+def test_handle_file_no_product_column():
     """
     test uploaded file with missing column 'product_name'
     """
