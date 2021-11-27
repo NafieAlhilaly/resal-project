@@ -59,7 +59,7 @@ html = """
 
 @app.get("/", status_code=200)
 async def main() -> Any:
-    """ a simple html form to recieve files/messages from"""
+    """ an endpoint to response a simple html form to recieve files/messages from"""
     return HTMLResponse(html)
 
 @app.websocket("/ws")
