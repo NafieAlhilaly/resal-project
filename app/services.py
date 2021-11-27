@@ -1,7 +1,6 @@
-from io import StringIO
+from io import BytesIO
 from typing import Any, Union
 import pandas as pd
-import json
 
 def is_csv(file_name: str) -> bool:
     """
@@ -33,7 +32,7 @@ def send_notifications(content: Any = None, msg: str = "Your file is ready") -> 
 
     return {"msg": msg, "content": content}
 
-def handle_file(file: str , filename: str, from_memory: bool = True) -> Union[str, dict]:
+def handle_file(file, filename: str, from_memory: bool = True) -> Union[str, dict]:
     """ 
     Handle uploaded file, check if it .csv and then extract top rating
     products information from it.
@@ -54,7 +53,7 @@ def handle_file(file: str , filename: str, from_memory: bool = True) -> Union[st
         return {"msg": "err : not a csv file"}
 
     if from_memory:
-        df = pd.read_csv(StringIO(str(file, 'utf-8')), encoding='utf-8')
+        df = pd.read_csv(BytesIO(file))
     else:
         df = pd.read_csv(file)
 
@@ -68,5 +67,5 @@ def handle_file(file: str , filename: str, from_memory: bool = True) -> Union[st
     
     top_products = {"top_products":list(top_products['product_name']), "product_rating":list(top_products['customer_average_rating'])}
     
-    send_notifications(content=json.dumps(top_products))
-    return json.dumps(top_products)
+    send_notifications(content=top_products)
+    return top_products
