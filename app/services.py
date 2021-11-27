@@ -1,5 +1,5 @@
 from io import BytesIO
-from typing import Any, Union
+from typing import Any, Callable, Union
 import pandas as pd
 
 def is_csv(file_name: str) -> bool:
@@ -29,10 +29,9 @@ def send_notifications(content: Any = None, msg: str = "Your file is ready") -> 
 
     return: dict of the message and content
     """
-    
     return {"msg": msg, "content": content}
 
-def handle_file(file: Any, from_memory: bool = True) -> dict:
+def handle_file(file: Any, from_memory: bool = True) -> Callable:
     """ 
     Handle uploaded file, check if it .csv and then extract top rating
     products information from it.
@@ -56,13 +55,12 @@ def handle_file(file: Any, from_memory: bool = True) -> dict:
 
     # look for 'customer_average_rating' and 'product_name' in the columns
     if "product_name" not in list(df.columns):
-        return {"msg": "err : could not find 'product_name' column"}
+        return send_notifications(msg="err : could not find 'product_name' column")
     elif "customer_average_rating" not in list(df.columns):
-        return {"msg": "err : could not find 'customer_average_rating' column"}
+        return send_notifications(msg="err : could not find 'customer_average_rating' column")
     
     top_products = df[df['customer_average_rating'] >= df['customer_average_rating'].max()]
     
     top_products = {"top_products":list(top_products['product_name']), "products_rating":list(top_products['customer_average_rating'])[0]}
-
-    send_notifications()
-    return top_products
+    
+    return send_notifications(content=top_products)
