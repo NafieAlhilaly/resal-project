@@ -42,7 +42,7 @@ def test_handle_file_with_duplicates():
 
 def test_handle_file_no_average_column():
     """
-    test uploaded file with missing column 'customer_average_rating'
+    test uploaded file with missing column 'customer_average_rating' or typos in it
     """
 
     with open("tests/sample data files/sample_data_without_average_column.csv") as file:
@@ -52,7 +52,7 @@ def test_handle_file_no_average_column():
 
 def test_handle_file_no_product_column():
     """
-    test uploaded file with missing column 'product_name'
+    test uploaded file with missing column 'product_name' or typos in it
     """
 
     with open("tests/sample data files/sample_data_without_product_column.csv") as file:
