@@ -90,3 +90,12 @@ def test_send_notifications_random_params() -> None:
     file = random.choice(files)
 
     assert services.send_notifications(msg=msg, content=file) == {"msg":msg, "content":file}
+
+
+def test_handle_large_data():
+    """
+    Test large_data.csv(2M rows) 
+    """
+
+    with open("tests/sample data files/large_data.csv") as file:
+        assert type(services.handle_file(file, False)) is dict
