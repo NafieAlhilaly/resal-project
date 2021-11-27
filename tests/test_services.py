@@ -26,7 +26,7 @@ def test_handle_file_no_duplicates():
     with open("tests/sample data files/sample_data.csv") as file:
         assert services.handle_file(
             file,
-            False) == {"top_products": ["Massoub gift card"], "products_rating": 5.0}
+            False) == {'msg': 'Your file is ready', 'content': {'top_products': ['Massoub gift card'], 'products_rating': 5.0}}
 
 
 def test_handle_file_with_duplicates():
@@ -37,7 +37,8 @@ def test_handle_file_with_duplicates():
     with open("tests/sample data files/sample_data_duplicates.csv") as file:
         assert services.handle_file(
             file,
-            False) == {'top_products': ['Arekah gift card', 'Massoub gift card'], 'products_rating': 5.0}
+            False) == {'msg': 'Your file is ready', 'content': {'top_products': ['Arekah gift card', 'Massoub gift card'], 'products_rating': 5.0}}
+
 
 def test_handle_file_no_average_column():
     """
@@ -47,7 +48,7 @@ def test_handle_file_no_average_column():
     with open("tests/sample data files/sample_data_without_average_column.csv") as file:
         assert services.handle_file(
             file,
-            False) == {'msg': "err : could not find 'customer_average_rating' column"}
+            False) == {'msg': "err : could not find 'customer_average_rating' column", 'content': None}
 
 def test_handle_file_no_product_column():
     """
@@ -57,7 +58,7 @@ def test_handle_file_no_product_column():
     with open("tests/sample data files/sample_data_without_product_column.csv") as file:
         assert services.handle_file(
             file,
-            False) == {'msg': "err : could not find 'product_name' column"}
+            False) == {'msg': "err : could not find 'product_name' column", 'content': None}
 
 def test_send_notifications_defaults():
     """
