@@ -7,5 +7,5 @@ def test_upload():
     """Test upload endpoint if status_code is 200(ok)"""
 
     response = client.post("/upload")
-    response.status_code == 200
+    response.status_code == 202
     response.json() == {"message": "file received, processing your file..."}
