@@ -49,9 +49,6 @@ def handle_file(file, filename: str, from_memory: bool = True) -> Union[str, dic
         or return a dict with error message if any error happens
     """
 
-    if not is_csv(filename):
-        return {"msg": "err : not a csv file"}
-
     if from_memory:
         df = pd.read_csv(BytesIO(file))
     else:
