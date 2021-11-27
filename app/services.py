@@ -4,7 +4,7 @@ long code/logic inside of an endpoint
 """
 
 from io import BytesIO
-from typing import Any, Callable, Union
+from typing import Any, Callable
 import pandas as pd
 
 def is_csv(file_name: str) -> bool:
