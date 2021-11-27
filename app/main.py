@@ -63,6 +63,8 @@ async def main():
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
+    """ a websocket """
+    
     await websocket.accept()
     while True:
         data = await websocket.receive_bytes()
