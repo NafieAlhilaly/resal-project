@@ -58,6 +58,7 @@ html = """
 
 @app.get("/")
 async def main():
+    """ a smple html form to recieve files/messages from"""
     return HTMLResponse(html)
 
 @app.websocket("/ws")
