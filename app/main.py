@@ -3,10 +3,19 @@ from fastapi.responses import HTMLResponse
 from app import services
 from io import StringIO
 import pandas as pd
+
 app = FastAPI()
 
 @app.post("/upload", status_code=202)
 async def upload(background_tasks: BackgroundTasks, file: UploadFile = File(...)):
+
+    """
+    Endpoint accepts a File request expected to be a csv file, it will check if it csv or not
+    using service.is_csv()
+    if it is not a csv an exception will raise
+    if it is a csv file it will be proccessed as a background task and send a notification when it finish
+
+    """
     if not services.is_csv(file.filename):
         raise HTTPException(status_code=415, detail="Not a csv file")
         
