@@ -2,7 +2,7 @@ import os
 import random
 from app import services
 
-def test_is_csv():
+def test_is_csv() -> None:
     """ 
     test if the given file is csv
     """
@@ -10,7 +10,7 @@ def test_is_csv():
     file: str = "awesome_file_name.csv"
     assert services.is_csv(file) == True
 
-def test_is_not_csv():
+def test_is_not_csv() -> None:
     """ 
     test if the given file is not csv
     """
@@ -18,7 +18,7 @@ def test_is_not_csv():
     file: str = "file_name.pdf"
     assert services.is_csv(file) == False
 
-def test_handle_file_no_duplicates():
+def test_handle_file_no_duplicates() -> None:
     """
     test uploaded file without duplicated data(same rating)
     """
@@ -29,7 +29,7 @@ def test_handle_file_no_duplicates():
             False) == {'msg': 'Your file is ready', 'content': {'top_products': ['Massoub gift card'], 'products_rating': 5.0}}
 
 
-def test_handle_file_with_duplicates():
+def test_handle_file_with_duplicates() -> None:
     """
     test uploaded file without duplicated data(same rating)
     """
@@ -40,7 +40,7 @@ def test_handle_file_with_duplicates():
             False) == {'msg': 'Your file is ready', 'content': {'top_products': ['Arekah gift card', 'Massoub gift card'], 'products_rating': 5.0}}
 
 
-def test_handle_file_no_average_column():
+def test_handle_file_no_average_column() -> None:
     """
     test uploaded file with missing column 'customer_average_rating' or typos in it
     """
@@ -50,7 +50,7 @@ def test_handle_file_no_average_column():
             file,
             False) == {'msg': "err : could not find 'customer_average_rating' column", 'content': None}
 
-def test_handle_file_no_product_column():
+def test_handle_file_no_product_column() -> None:
     """
     test uploaded file with missing column 'product_name' or typos in it
     """
@@ -60,14 +60,14 @@ def test_handle_file_no_product_column():
             file,
             False) == {'msg': "err : could not find 'product_name' column", 'content': None}
 
-def test_send_notifications_defaults():
+def test_send_notifications_defaults() -> None:
     """
     test send notifications with defaults
     """
 
     assert services.send_notifications() == {"msg": "Your file is ready", "content": None}
 
-def test_send_notifications_random_params():
+def test_send_notifications_random_params() -> None:
     """
     test send notifications with given random messages and content
     """
