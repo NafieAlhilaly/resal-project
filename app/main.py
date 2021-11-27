@@ -57,7 +57,7 @@ html = """
 </html>
 """
 
-@app.get("/")
+@app.get("/", status_code=200)
 async def main() -> Any:
     """ a smple html form to recieve files/messages from"""
     return HTMLResponse(html)
