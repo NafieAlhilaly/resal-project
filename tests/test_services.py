@@ -60,7 +60,7 @@ def test_handle_file_no_product_column() -> None:
             file,
             False) == {'msg': "err : could not find 'product_name' column", 'content': None}
 
-def test_send_notifications_defaults() -> None:
+def test_send_notifications_default() -> None:
     """
     test send notifications with defaults
     """
