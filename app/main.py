@@ -1,7 +1,8 @@
 from fastapi import FastAPI, File, UploadFile, BackgroundTasks, HTTPException, WebSocket
 from fastapi.responses import HTMLResponse
 from app import services
-
+from io import StringIO
+import pandas as pd
 app = FastAPI()
 
 @app.post("/upload", status_code=202)
@@ -38,8 +39,7 @@ html = """
             };
             function sendMessage(event) {
                 var input = document.getElementById("messageText")
-                ws.send(input.value)
-                input.value = ''
+                ws.send(input)
                 event.preventDefault()
             }
         </script>
@@ -55,5 +55,7 @@ async def main():
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     while True:
-        data = await websocket.receive_text()
-        await websocket.send_text(f"Message text was: {data}")
+        data = await websocket.receive_bytes()
+        df = pd.read_csv(StringIO(data))
+        print(df)
+
