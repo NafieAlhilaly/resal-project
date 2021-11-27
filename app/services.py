@@ -49,8 +49,7 @@ def handle_file(file: Any, from_memory: bool = True) -> Callable:
             file is string path in local storage
 
     return :
-        it will return dict if no errors
-        or return a dict with error message if any error happens
+        it will call send_notifications() with the given message
     """
 
     if from_memory:
